@@ -1,6 +1,8 @@
 ﻿using CaWorkshop.Application.Common.Interfaces;
+using CaWorkshop.Application.Common.Services.Identity;
 using CaWorkshop.Infrastructure.Data;
 using CaWorkshop.Infrastructure.Identity;
+using CaWorkshop.Infrastructure.Persistence.Interceptors;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,8 +17,11 @@ public static class ConfiguresServices
         // Add services to the container.
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            options
+                .UseSqlServer(connectionString)
+                .AddInterceptors(
+                    ActivatorUtilities.CreateInstance<AuditEntitiesSaveChangesInterceptor>(sp)));
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>(sp => 
             sp.GetRequiredService<ApplicationDbContext>());
@@ -31,6 +36,8 @@ public static class ConfiguresServices
 
         services.AddAuthentication()
             .AddIdentityServerJwt();
+
+        services.AddScoped<IIdentityService, IdentityService>();
 
         return services;
     }
