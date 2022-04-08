@@ -1,6 +1,8 @@
-﻿namespace CaWorkshop.Domain.Entities;
+﻿using CaWorkshop.Domain.Common;
 
-public class TodoItem
+namespace CaWorkshop.Domain.Entities;
+
+public class TodoItem : AuditableEntity
 {
     public int Id { get; set; }
 
