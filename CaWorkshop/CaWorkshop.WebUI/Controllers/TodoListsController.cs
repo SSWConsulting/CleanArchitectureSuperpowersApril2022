@@ -20,6 +20,7 @@ public class TodoListsController : ApiControllerBase
     // POST: api/TodoLists
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [AllowAnonymous]
     public async Task<ActionResult<int>> PostTodoList(CreateTodoListCommand command)
     {
         return await Mediator.Send(command);
