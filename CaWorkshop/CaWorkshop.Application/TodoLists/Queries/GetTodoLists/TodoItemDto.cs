@@ -1,8 +1,9 @@
-﻿using System.Linq.Expressions;
+﻿using AutoMapper;
+using CaWorkshop.Application.Common.Mappings;
 
 namespace CaWorkshop.Application.TodoLists.Queries.GetTodoLists;
 
-public class TodoItemDto
+public class TodoItemDto : IMapFrom<TodoItem>
 {
     public int Id { get; set; }
 
@@ -16,19 +17,10 @@ public class TodoItemDto
 
     public string? Note { get; set; }
 
-    public static Expression<Func<TodoItem, TodoItemDto>> Projection
+    public void Mapping(Profile profile)
     {
-        get
-        {
-            return item => new TodoItemDto
-            {
-                Id = item.Id,
-                ListId = item.ListId,
-                Title = item.Title,
-                Done = item.Done,
-                Priority = (int)item.Priority,
-                Note = item.Note
-            };
-        }
+        profile.CreateMap<TodoItem, TodoItemDto>()
+            .ForMember(d => d.Priority, opt =>
+                opt.MapFrom(s => (int)s.Priority));
     }
 }
