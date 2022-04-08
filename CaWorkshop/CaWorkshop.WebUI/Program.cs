@@ -73,8 +73,8 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseOpenApi();
-app.UseSwaggerUi3();
+app.UseSwaggerUi3(configure => 
+    configure.DocumentPath = "/api/v1/specification.json");
 
 app.UseRouting();
 
