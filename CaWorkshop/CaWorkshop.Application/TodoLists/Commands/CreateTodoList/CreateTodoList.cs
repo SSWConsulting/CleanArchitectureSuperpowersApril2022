@@ -21,7 +21,8 @@ public class CreateTodoListCommandValidator
             .MaximumLength(240)
             .NotEmpty()
             .MustAsync(BeUniqueTitle)
-                .WithMessage("The specified title already exists.");
+                .WithMessage("The specified title already exists.")
+                .WithErrorCode("UNIQUE_TITLE");
     }
 
     public async Task<bool> BeUniqueTitle(string title,
