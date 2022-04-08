@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CaWorkshop.WebUI.Data.Migrations
+namespace CaWorkshop.Infrastructure.Data.Migrations
 {
     public partial class Todo : Migration
     {

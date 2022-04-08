@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CaWorkshop.WebUI.Models;
+﻿namespace CaWorkshop.Domain.Entities;
 
 public class TodoItem
 {
@@ -8,11 +6,8 @@ public class TodoItem
 
     public int ListId { get; set; }
 
-    [Required]
-    [StringLength(280)]
     public string? Title { get; set; }
 
-    [StringLength(4000)]
     public string? Note { get; set; }
 
     public bool Done { get; set; }

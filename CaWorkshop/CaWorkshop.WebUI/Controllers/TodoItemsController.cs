@@ -1,6 +1,6 @@
 #nullable disable
-using CaWorkshop.WebUI.Data;
-using CaWorkshop.WebUI.Models;
+using CaWorkshop.Domain.Entities;
+using CaWorkshop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
